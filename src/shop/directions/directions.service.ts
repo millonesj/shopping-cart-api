@@ -12,6 +12,7 @@ export class DirectionsService {
     @InjectRepository(Direction)
     private directionRepository: Repository<Direction>,
   ) {}
+
   async create(createDirectionDto: CreateDirectionDto) {
     const createdRecord = await this.directionRepository.save(
       createDirectionDto,
@@ -21,21 +22,12 @@ export class DirectionsService {
   }
 
   async findAllByUser(queryDirectionDto: QueryDirectionDto) {
-    console.log(
-      '🚀 ~ file: directions.service.ts ~ line 24 ~ DirectionsService ~ findAllByUser ~ queryDirectionDto',
-      queryDirectionDto,
-    );
-    const x = await this.directionRepository.find({
+    return await this.directionRepository.find({
       where: {
         userId: queryDirectionDto.userId,
-        // isDeleted: false,
+        isDeleted: false,
       },
     });
-    console.log(
-      '🚀 ~ file: directions.service.ts ~ line 30 ~ DirectionsService ~ findAllByUser ~ x',
-      x,
-    );
-    return x;
   }
 
   async findOne(id: number) {
