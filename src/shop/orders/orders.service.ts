@@ -53,15 +53,17 @@ export class OrdersService {
       }
 
       // Validate paymethod
-      const paymethod = await this.paymethodsService.findOne(
-        createOrderDto.directionId,
-      );
-
-      if (!paymethod) {
-        throw new NotFoundException(
-          `No paymethod found with id "${createOrderDto.directionId}".`,
-        );
-      }
+      // const paymethod = await this.paymethodsService.findOne(
+      //   createOrderDto.directionId,
+      // );
+      // if (!paymethod) {
+      //   throw new NotFoundException(
+      //     `No paymethod found with id "${createOrderDto.directionId}".`,
+      //   );
+      // }
+      //
+      // Set paymethod default = "contra en entrega"
+      const paymethodId = 1;
 
       // Validate order status
       const orderStatus = await this.orderStatusService.findOne(
@@ -74,7 +76,10 @@ export class OrdersService {
         );
       }
 
-      const createdOrder = await this.ordersRepository.create(createOrderDto);
+      const createdOrder = await this.ordersRepository.create({
+        ...createOrderDto,
+        paymethodId,
+      });
 
       const savedOrder = await queryRunner.manager.save(createdOrder);
 

@@ -12,10 +12,10 @@ export class CreateOrderDto {
   @IsNotEmpty({ message: 'directionId is required' })
   directionId: number;
 
-  @Type(() => Number)
-  @IsInt()
-  @IsNotEmpty({ message: 'paymethodId is required' })
-  paymethodId: number;
+  // @Type(() => Number)
+  // @IsInt()
+  // @IsNotEmpty({ message: 'paymethodId is required' })
+  // paymethodId: number;
 
   @Type(() => Number)
   @IsInt()
