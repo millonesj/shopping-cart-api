@@ -209,7 +209,8 @@ export class CartsService {
     }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} cart`;
+  async remove(id: number) {
+    await this.cartRepository.delete(id);
+    return true;
   }
 }

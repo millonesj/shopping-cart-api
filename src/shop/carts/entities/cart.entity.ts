@@ -19,7 +19,6 @@ export class Cart extends BasicEntity {
   @OneToMany(
     () => CartDetail,
     cartDetail => cartDetail.cart,
-    { nullable: false, cascade: true },
   )
   @JoinColumn({ name: 'id' })
   cartDetail: CartDetail[];

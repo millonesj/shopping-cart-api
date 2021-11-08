@@ -32,6 +32,11 @@ export class CartDetail {
   @ManyToOne(
     () => Cart,
     cart => cart.id,
+    {
+      nullable: false,
+      cascade: ['insert', 'update', 'remove'],
+      onDelete: 'CASCADE',
+    },
   )
   @JoinColumn({ name: 'cart_id' })
   cart: Cart;
