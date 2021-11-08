@@ -4,6 +4,7 @@ import { CartsModule } from './carts/carts.module';
 import { UsersModule } from './users/users.module';
 import { CartDetailModule } from './cart-detail/cart-detail.module';
 import { DirectionsModule } from './directions/directions.module';
+import { OrderStatusModule } from './order-status/order-status.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { DirectionsModule } from './directions/directions.module';
     CartDetailModule,
 
     DirectionsModule,
+    OrderStatusModule,
   ],
 })
 export class ShopModule {}
