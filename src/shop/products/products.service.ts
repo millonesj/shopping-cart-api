@@ -78,8 +78,13 @@ export class ProductsService {
     return new PageDto(productsDto, pageMetaDto);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} product`;
+  async findOne(id: number) {
+    return await this.productRepository.findOne({
+      where: {
+        id,
+        isDeleted: false,
+      },
+    });
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {
