@@ -1,3 +1,4 @@
+import { ApiTags } from '@nestjs/swagger';
 import {
   Controller,
   Get,
@@ -14,6 +15,7 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 import { QueryOrderDto } from './dto/query-order.dto';
 
 @Controller('orders')
+@ApiTags('orders')
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 

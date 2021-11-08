@@ -1,9 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CartDetailService } from './cart-detail.service';
 import { CreateCartDetailDto } from './dto/create-cart-detail.dto';
 import { UpdateCartDetailDto } from './dto/update-cart-detail.dto';
 
 @Controller('cart-detail')
+@ApiTags('cart-detail')
 export class CartDetailController {
   constructor(private readonly cartDetailService: CartDetailService) {}
 
@@ -23,7 +33,10 @@ export class CartDetailController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCartDetailDto: UpdateCartDetailDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCartDetailDto: UpdateCartDetailDto,
+  ) {
     return this.cartDetailService.update(+id, updateCartDetailDto);
   }
 

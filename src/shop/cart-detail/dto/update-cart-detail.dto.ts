@@ -1,14 +1,15 @@
-import { PartialType } from '@nestjs/mapped-types';
+import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsInt, IsNotEmpty, Min } from 'class-validator';
-import { CreateCartDetailDto } from './create-cart-detail.dto';
 
 export class UpdateCartDetailDto {
+  @ApiProperty()
   @Type(() => Number)
   @IsInt()
   @IsNotEmpty({ message: 'productId is required' })
   readonly productId: number;
 
+  @ApiProperty()
   @Type(() => Number)
   @Min(1)
   @IsInt()

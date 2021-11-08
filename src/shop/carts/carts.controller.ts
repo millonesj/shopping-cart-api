@@ -1,3 +1,4 @@
+import { ApiTags } from '@nestjs/swagger';
 import {
   Controller,
   Get,
@@ -9,11 +10,11 @@ import {
   Query,
 } from '@nestjs/common';
 import { CartsService } from './carts.service';
-import { CreateCartDetailDto } from './dto';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
 
 @Controller('carts')
+@ApiTags('carts')
 export class CartsController {
   constructor(private readonly cartsService: CartsService) {}
 
