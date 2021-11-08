@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { CartDetailModule } from './cart-detail/cart-detail.module';
 import { DirectionsModule } from './directions/directions.module';
 import { OrderStatusModule } from './order-status/order-status.module';
+import { PaymethodsModule } from './paymethods/paymethods.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { OrderStatusModule } from './order-status/order-status.module';
 
     DirectionsModule,
     OrderStatusModule,
+    PaymethodsModule,
   ],
 })
 export class ShopModule {}
