@@ -49,13 +49,43 @@ export class CartsService {
         userId: createCartDto.userId,
       });
 
-      await queryRunner.manager.save(createdCart);
+      const savedCart = await queryRunner.manager.save(createdCart);
 
       if (createCartDto.detail.length === 0) {
         throw new NotFoundException(`There are no elements in detail.`);
       }
 
-      await this.saveDetail(createdCart.userId, createCartDto.detail);
+      if (createCartDto.detail.length === 0) {
+        throw new NotFoundException(`There are no elements in detail.`);
+      }
+
+      for (let index = 0; index < createCartDto.detail.length; index++) {
+        const cartDetail = createCartDto.detail[index];
+
+        // Validate if exist product
+        const product = await this.productsService.findOne(
+          cartDetail.productId,
+        );
+
+        if (!product) {
+          throw new NotFoundException(
+            `No product found with id "${cartDetail.productId}".`,
+          );
+        }
+
+        // Validate product's stock
+        if (product.stock <= cartDetail.quantity) {
+          throw new NotFoundException(
+            `No product stock with productId "${cartDetail.productId}".`,
+          );
+        }
+
+        const createdCartDetail = this.cartDetailRepository.create({
+          cartId: savedCart.id,
+          ...cartDetail,
+        });
+        await queryRunner.manager.save(createdCartDetail);
+      }
 
       queryRunner.commitTransaction();
       return await this.findByUser(createCartDto.userId);
