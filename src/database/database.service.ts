@@ -30,7 +30,7 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
         username: this.configService.get<string>('DB_USER'),
         password: this.configService.get<string>('DB_PASSWORD'),
         logging: this.configService.get<LoggerOptions>('DB_LOG_LEVEL'),
-        synchronize: false,
+        synchronize: true,
         entities: [path.join(__dirname, '/../shop/**/*.entity{.ts,.js}')],
         namingStrategy: new SnakeNamingStrategy(),
       } as TypeOrmModuleOptions;
