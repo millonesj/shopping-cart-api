@@ -126,8 +126,13 @@ export class OrdersService {
     }
   }
 
-  findAll() {
-    return `This action returns all orders`;
+  async findAllByUser(userId: number) {
+    return await this.ordersRepository.find({
+      where: {
+        userId,
+      },
+      relations: ['user', 'orderDetail', 'orderStatus', 'direction'],
+    });
   }
 
   async findOne(id: number) {
