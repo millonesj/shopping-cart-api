@@ -6,6 +6,8 @@ import { CartDetailModule } from './cart-detail/cart-detail.module';
 import { DirectionsModule } from './directions/directions.module';
 import { OrderStatusModule } from './order-status/order-status.module';
 import { PaymethodsModule } from './paymethods/paymethods.module';
+import { OrderDetailModule } from './order-detail/order-detail.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
@@ -13,10 +15,11 @@ import { PaymethodsModule } from './paymethods/paymethods.module';
     CartsModule,
     UsersModule,
     CartDetailModule,
-
+    OrdersModule,
     DirectionsModule,
     OrderStatusModule,
     PaymethodsModule,
+    OrderDetailModule,
   ],
 })
 export class ShopModule {}
