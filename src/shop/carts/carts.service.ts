@@ -96,14 +96,12 @@ export class CartsService {
   }
 
   async findByUser(userId: number): Promise<Cart> {
-    const res = await this.cartRepository.findOne({
+    return await this.cartRepository.findOne({
       where: {
         userId,
       },
       relations: ['cartDetail'],
     });
-
-    return res;
   }
 
   async findOne(id: number): Promise<Cart> {
