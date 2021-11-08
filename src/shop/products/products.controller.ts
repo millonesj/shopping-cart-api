@@ -9,11 +9,22 @@ import {
   Query,
   UseInterceptors,
   ClassSerializerInterceptor,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
+import { ApiPaginatedResponse } from '../../share/decorators/api-paginated-response.decorator';
 import { ProductsService } from './products.service';
-import { CreateProductDto, UpdateProductDto, QueryProductDto } from './dto';
+import {
+  CreateProductDto,
+  UpdateProductDto,
+  QueryProductDto,
+  ReadProductDto,
+} from './dto';
+import { PageDto } from '../../share/dto/page.dto';
 
 @Controller('products')
+@ApiTags('Products')
 @UseInterceptors(ClassSerializerInterceptor)
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
@@ -24,10 +35,12 @@ export class ProductsController {
   }
 
   @Get()
+  @HttpCode(HttpStatus.OK)
+  @ApiPaginatedResponse(ReadProductDto)
   findAll(
     @Query()
     queryProduct: QueryProductDto,
-  ) {
+  ): Promise<PageDto<ReadProductDto>> {
     return this.productsService.findAll(queryProduct);
   }
 
