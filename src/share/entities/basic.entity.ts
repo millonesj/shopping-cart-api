@@ -15,9 +15,9 @@ export class BasicEntity {
   @Column({ type: 'boolean', default: false, select: false })
   isDeleted: boolean;
 
-  @CreateDateColumn({ type: 'timestamp' })
+  @CreateDateColumn({ type: 'timestamp', select: false })
   createdDate: string;
 
-  @UpdateDateColumn({ type: 'timestamp' })
+  @UpdateDateColumn({ type: 'timestamp', select: false })
   modifiedDate: string;
 }
