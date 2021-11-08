@@ -1,6 +1,6 @@
 import { BasicEntity } from 'src/share/entities/basic.entity';
 import { User } from 'src/shop/users/entities/user.entity';
-import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class Direction extends BasicEntity {
@@ -10,7 +10,7 @@ export class Direction extends BasicEntity {
   @Column({ type: 'int' })
   userId: number;
 
-  @OneToOne(
+  @OneToMany(
     () => User,
     user => user.id,
     { nullable: false },
