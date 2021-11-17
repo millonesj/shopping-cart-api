@@ -1,0 +1,31 @@
+version: "3.5"
+services:
+  db:
+    container_name: shop_db
+    image: postgres:12.3-alpine
+    restart: always
+    ports:
+      - ${DB_PORT}:${DB_INTERNAL_PORT}
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_NAME}
+    networks:
+      - dockernet_shop
+  api:
+    container_name: shop_api
+    build:
+      context: .
+    volumes:
+      - ./:/api:rw
+    environment:
+      - NODE_ENV=${NODE_ENV}
+    ports:
+      - ${APP_PORT}:3000
+    networks:
+      - dockernet_shop
+    depends_on:
+      - db
+networks:
+  dockernet_shop:
+    external: true
